@@ -2,7 +2,7 @@ package com.example.rightnow
 
 import com.example.rightnow.databinding.DialogQuizResultBinding
 
-class QuizGradeResultDialog: BaseDialogFragment<DialogQuizResultBinding>(R.layout.dialog_quiz_result) {
+class QuizResultDialog: BaseDialogFragment<DialogQuizResultBinding>(R.layout.dialog_quiz_result) {
 
     override fun initStartView() {
         super.initStartView()

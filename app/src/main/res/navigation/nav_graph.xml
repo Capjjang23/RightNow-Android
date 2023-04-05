@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/quizResultDialog">
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.example.rightnow.QuizFragment"
+        android:label="QuizFragment" >
+        <action
+            android:id="@+id/action_quizFragment_to_quizResultDialog"
+            app:destination="@id/quizResultDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.rightnow.StartFragment"
+        android:label="StartFragment" >
+        <action
+            android:id="@+id/action_startFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/quizResultDialog"
+        android:name="com.example.rightnow.QuizResultDialog"
+        android:label="QuizResultDialog" >
+        <action
+            android:id="@+id/action_quizResultDialog_to_quizGradeFragment2"
+            app:destination="@id/quizGradeFragment2" />
+    </dialog>
+    <fragment
+        android:id="@+id/quizGradeFragment2"
+        android:name="com.example.rightnow.QuizGradeFragment"
+        android:label="QuizGradeFragment" >
+        <action
+            android:id="@+id/action_quizGradeFragment2_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
+</navigation>
