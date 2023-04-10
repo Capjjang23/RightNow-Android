@@ -19,6 +19,9 @@ class StartFragment  : BaseFragment<FragmentStartBinding>(R.layout.fragment_star
     override fun initAfterBinding() {
         super.initAfterBinding()
 
+        binding.startScreen.setOnClickListener {
+            navController.navigate(R.id.action_startFragment_to_quizFragment)
+        }
 
     }
 
