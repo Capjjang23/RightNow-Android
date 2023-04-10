@@ -13,7 +13,7 @@
     </fragment>
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.example.rightnow.StartFragment"
+        android:name="com.example.rightnow.LoadFragment"
         android:label="StartFragment" >
         <action
             android:id="@+id/action_startFragment_to_quizFragment"
