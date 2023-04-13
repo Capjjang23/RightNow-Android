@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/startFragment">
+    app:startDestination="@id/loadFragment">
     <fragment
         android:id="@+id/quizFragment"
         android:name="com.example.rightnow.QuizFragment"
@@ -10,19 +10,27 @@
         <action
             android:id="@+id/action_quizFragment_to_quizResultDialog"
             app:destination="@id/quizResultDialog" />
+        <argument
+            android:name="argsString"
+            app:argType="string"
+            android:defaultValue=""/>
     </fragment>
     <fragment
-        android:id="@+id/startFragment"
+        android:id="@+id/loadFragment"
         android:name="com.example.rightnow.LoadFragment"
-        android:label="StartFragment" >
+        android:label="LoadFragment" >
         <action
-            android:id="@+id/action_startFragment_to_quizFragment"
-            app:destination="@id/quizFragment" />
+            android:id="@+id/action_loadFragment_to_startFragment"
+            app:destination="@id/startFragment" />
     </fragment>
     <dialog
         android:id="@+id/quizResultDialog"
         android:name="com.example.rightnow.QuizResultDialog"
         android:label="QuizResultDialog" >
+        <argument
+            android:name="argsString"
+            app:argType="string"
+            android:defaultValue=""/>
         <action
             android:id="@+id/action_quizResultDialog_to_quizGradeFragment2"
             app:destination="@id/quizGradeFragment2" />
@@ -34,5 +42,13 @@
         <action
             android:id="@+id/action_quizGradeFragment2_to_startFragment"
             app:destination="@id/startFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.rightnow.StartFragment"
+        android:label="StartFragment" >
+        <action
+            android:id="@+id/action_startFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
     </fragment>
 </navigation>

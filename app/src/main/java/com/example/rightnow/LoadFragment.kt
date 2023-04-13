@@ -1,9 +1,9 @@
 package com.example.rightnow
 
 import com.android.example.travalue.base.BaseFragment
-import com.example.rightnow.databinding.FragmentQuizGradeBinding
+import com.example.rightnow.databinding.FragmentLoadBinding
 
-class QuizGradeFragment: BaseFragment<FragmentQuizGradeBinding>(R.layout.fragment_quiz_grade) {
+class LoadFragment  : BaseFragment<FragmentLoadBinding>(R.layout.fragment_load) {
 
     override fun initStartView() {
         super.initStartView()
@@ -19,9 +19,10 @@ class QuizGradeFragment: BaseFragment<FragmentQuizGradeBinding>(R.layout.fragmen
     override fun initAfterBinding() {
         super.initAfterBinding()
 
-        binding.button2.setOnClickListener {
-            navController.navigate(R.id.action_quizGradeFragment2_to_startFragment)
+        binding.startScreen.setOnClickListener {
+            navController.navigate(R.id.action_loadFragment_to_startFragment)
         }
+
     }
 
 }
