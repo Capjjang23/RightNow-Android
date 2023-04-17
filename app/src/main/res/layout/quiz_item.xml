@@ -40,16 +40,6 @@
                     app:layout_constraintStart_toStartOf="@+id/iv_quiz_img" />
 
                 <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:text="이곳에 단어가 자동입력될 거에요!"
-                    android:textColor="#C4C4C4"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView4" />
-
-                <TextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -66,8 +56,43 @@
                     android:layout_height="0.5dp"
                     android:layout_marginBottom="10dp"
                     android:background="#C4C4C4"
-                    app:layout_constraintBottom_toTopOf="@+id/textView6"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_hint"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_quiz_img"
                     app:layout_constraintStart_toStartOf="@+id/textView4" />
+
+                <ImageButton
+                    android:id="@+id/btn_back"
+                    android:layout_width="31dp"
+                    android:layout_height="29dp"
+                    android:background="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/view"
+                    app:layout_constraintTop_toTopOf="@+id/tv_hint"
+                    app:srcCompat="@drawable/btn_back" />
+
+                <TextView
+                    android:id="@+id/tv_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text=" 이곳에 단어가 자동입력 될거에요!"
+                    android:textColor="#C4C4C4"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/view" />
+
+                <TextView
+                    android:id="@+id/tv_alpha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:text="Chick"
+                    android:textColor="#000000"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_back"
+                    app:layout_constraintStart_toStartOf="@+id/view"
+                    app:layout_constraintTop_toBottomOf="@+id/view" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 

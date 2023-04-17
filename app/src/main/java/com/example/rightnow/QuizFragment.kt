@@ -31,13 +31,11 @@ class QuizFragment  : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) 
     private var recorder: MediaRecorder? = null
     private var state:Boolean = false
 
-    @RequiresApi(Build.VERSION_CODES.S)
     override fun initStartView() {
         super.initStartView()
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.S)
     override fun initDataBinding() {
         super.initDataBinding()
 
@@ -75,6 +73,8 @@ class QuizFragment  : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) 
         binding.btnCheck.setOnClickListener {
             val action = QuizFragmentDirections.actionQuizFragmentToQuizResultDialog(answer)
             navController.navigate(action)
+
+
         }
 
         binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
