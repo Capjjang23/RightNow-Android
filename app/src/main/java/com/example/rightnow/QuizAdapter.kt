@@ -37,6 +37,7 @@ class QuizAdapter(var list: ArrayList<Int>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.img.setImageResource(list[position])
 
+
         // 알파벳 지우기
         holder.backBtn.setOnClickListener {
             val before_alpha = holder.alpha.text

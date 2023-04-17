@@ -34,7 +34,8 @@ class QuizResultDialog: BaseBottomDialogFragment<DialogQuizResultBinding>(R.layo
                 }
                 else
                     binding.tvCheck.text ="오답입니다!"
-                binding.tvAnswer.text="고양이는 영어로  cat입니다."
+                binding.tvQuiz.text="고양이는 영어로"
+                binding.tvAnswer.text="cat"
             }
             "dog" -> {
                 if(MyApplication.prefs.getString("myAnswer", "null") == "dog"){
@@ -46,7 +47,8 @@ class QuizResultDialog: BaseBottomDialogFragment<DialogQuizResultBinding>(R.layo
 
                 else
                     binding.tvCheck.text ="오답입니다!"
-                binding.tvAnswer.text="강아지는 영어로  dog입니다."
+                binding.tvQuiz.text="강아지는 영어로"
+                binding.tvAnswer.text="dog"
             }
             "elephant"->{
                 if(MyApplication.prefs.getString("myAnswer", "null") == "elephant"){
@@ -57,7 +59,8 @@ class QuizResultDialog: BaseBottomDialogFragment<DialogQuizResultBinding>(R.layo
                 }
                 else
                     binding.tvCheck.text ="오답입니다!"
-                binding.tvAnswer.text="코끼리는 영어로  elephant입니다."
+                binding.tvQuiz.text="코끼리는 영어로"
+                binding.tvAnswer.text="elephant"
             }
             "frog"->{
                 if(MyApplication.prefs.getString("myAnswer", "null") == "frog"){
@@ -68,7 +71,8 @@ class QuizResultDialog: BaseBottomDialogFragment<DialogQuizResultBinding>(R.layo
                 }
                 else
                     binding.tvCheck.text ="오답입니다!"
-                binding.tvAnswer.text="개구리는 영어로  frog입니다."
+                binding.tvQuiz.text="개구리는 영어로"
+                binding.tvAnswer.text="frog"
             }
             "gorilla"->{
                 if(MyApplication.prefs.getString("myAnswer", "null") == "gorilla"){
@@ -80,7 +84,8 @@ class QuizResultDialog: BaseBottomDialogFragment<DialogQuizResultBinding>(R.layo
                 else
                     binding.tvCheck.text ="오답입니다!"
                 binding.button.visibility= View.VISIBLE
-                binding.tvAnswer.text="고릴라는 영어로  gorilla입니다."
+                binding.tvQuiz.text="고릴라는 영어로"
+                binding.tvAnswer.text="gorllia"
             }
         }
 
