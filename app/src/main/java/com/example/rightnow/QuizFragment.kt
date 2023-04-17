@@ -42,7 +42,6 @@ class QuizFragment  : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) 
         binding.viewPager2.adapter = QuizAdapter(getCardList()) // 어댑터 생성
         binding.viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
-
     }
 
 

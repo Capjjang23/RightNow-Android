@@ -8,6 +8,7 @@
 
     <application
         android:requestLegacyExternalStorage="true"
+        android:name="com.example.rightnow.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

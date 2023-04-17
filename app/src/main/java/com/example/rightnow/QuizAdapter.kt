@@ -66,6 +66,6 @@ class QuizAdapter(var list: ArrayList<Int>) :
         }
 
         // 정답확인
-//        holder.
+
     }
 }
