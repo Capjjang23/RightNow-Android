@@ -65,7 +65,7 @@ class QuizAdapter(var list: ArrayList<Int>) :
             holder.hint.visibility = View.INVISIBLE
         }
 
-        // 정답확인
-
+        // 정답저장
+        MyApplication.prefs.setString("myAnswer", holder.alpha.text.toString())
     }
 }

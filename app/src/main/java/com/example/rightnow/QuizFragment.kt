@@ -34,6 +34,7 @@ class QuizFragment  : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) 
     override fun initStartView() {
         super.initStartView()
 
+        MyApplication.prefs.setString("grade", "0")
     }
 
     override fun initDataBinding() {
@@ -69,11 +70,10 @@ class QuizFragment  : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) 
 
         binding.dotsIndicator.setViewPager2(binding.viewPager2)
 
+        // 정답 제출
         binding.btnCheck.setOnClickListener {
             val action = QuizFragmentDirections.actionQuizFragmentToQuizResultDialog(answer)
             navController.navigate(action)
-
-
         }
 
         binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

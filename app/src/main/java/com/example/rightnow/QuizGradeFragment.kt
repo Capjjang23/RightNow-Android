@@ -19,6 +19,9 @@ class QuizGradeFragment: BaseFragment<FragmentQuizGradeBinding>(R.layout.fragmen
     override fun initAfterBinding() {
         super.initAfterBinding()
 
+        val grade = MyApplication.prefs.getString("grade","00")
+
+        binding.tvGrade.text = "당신의 점수는 $grade 점입니다"
         binding.button2.setOnClickListener {
             navController.navigate(R.id.action_quizGradeFragment2_to_startFragment)
         }
