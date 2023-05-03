@@ -2,6 +2,8 @@ package com.example.rightnow
 
 import android.app.Activity
 import android.content.pm.PackageManager
+import android.media.AudioFormat
+import android.media.AudioRecord
 import android.media.MediaRecorder
 import android.os.Build
 import android.os.Environment
@@ -24,6 +26,7 @@ class QuizFragment  : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) 
 
     var quizItems = arrayListOf<String>("cat","dog","elephant","frog", "gorilla")
     var answer = ""
+    lateinit var audioRecord : AudioRecord
 
     private val userVersion:Int = Build.VERSION.SDK_INT
     private lateinit var mediaRecorder:MediaRecorder
@@ -31,10 +34,13 @@ class QuizFragment  : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) 
     private var recorder: MediaRecorder? = null
     private var state:Boolean = false
 
+
+
     override fun initStartView() {
         super.initStartView()
 
         MyApplication.prefs.setString("grade", "0")
+
     }
 
     override fun initDataBinding() {
@@ -42,6 +48,7 @@ class QuizFragment  : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) 
 
         binding.viewPager2.adapter = QuizAdapter(getCardList()) // 어댑터 생성
         binding.viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
 
     }
 
@@ -74,6 +81,7 @@ class QuizFragment  : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) 
         binding.btnCheck.setOnClickListener {
             val action = QuizFragmentDirections.actionQuizFragmentToQuizResultDialog(answer)
             navController.navigate(action)
+
         }
 
         binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
