@@ -1,10 +1,8 @@
-package com.example.rightnow
+package com.example.rightnow.ui
 
-import android.annotation.SuppressLint
-import android.util.Log
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import com.example.rightnow.R
 import com.example.rightnow.base.BaseBottomDialogFragment
 import com.example.rightnow.databinding.DialogQuizResultBinding
 

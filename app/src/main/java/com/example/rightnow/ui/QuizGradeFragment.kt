@@ -1,6 +1,7 @@
-package com.example.rightnow
+package com.example.rightnow.ui
 
 import com.android.example.travalue.base.BaseFragment
+import com.example.rightnow.R
 import com.example.rightnow.databinding.FragmentQuizGradeBinding
 
 class QuizGradeFragment: BaseFragment<FragmentQuizGradeBinding>(R.layout.fragment_quiz_grade) {

@@ -1,24 +1,12 @@
-package com.example.rightnow
+package com.example.rightnow.ui
 
-import android.app.Activity
-import android.content.pm.PackageManager
-import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.MediaRecorder
 import android.os.Build
-import android.os.Environment
-import android.util.Log
-import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
-import androidx.navigation.NavDirections
 import com.android.example.travalue.base.BaseFragment
+import com.example.rightnow.R
 import com.example.rightnow.databinding.FragmentQuizBinding
-import java.io.IOException
-import java.util.*
 import kotlin.collections.ArrayList
 
 

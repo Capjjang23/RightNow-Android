@@ -1,4 +1,4 @@
-package com.example.rightnow
+package com.example.rightnow.ui
 
 import android.app.Application
 

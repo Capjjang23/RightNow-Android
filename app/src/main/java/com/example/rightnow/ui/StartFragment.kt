@@ -1,6 +1,5 @@
-package com.example.rightnow
+package com.example.rightnow.ui
 
-import android.content.Context
 import android.content.pm.PackageManager
 import android.media.AudioFormat
 import android.media.AudioRecord
@@ -8,43 +7,37 @@ import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Environment
 import android.util.Log
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.android.example.travalue.base.BaseFragment
+import com.example.rightnow.AudioRecorder
+import com.example.rightnow.R
+import com.example.rightnow.apiManager.RecordApiManager
 import com.example.rightnow.databinding.FragmentStartBinding
-import okhttp3.MediaType
+import com.example.rightnow.model.RecordModel
+import com.example.rightnow.model.byteArrayToRecordModel
 import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
-import java.io.File
 import java.io.FileOutputStream
 import java.util.Date
 
 class StartFragment : BaseFragment<FragmentStartBinding>(R.layout.fragment_start) {
 
-    val retrofit = Retrofit.Builder()
-        .baseUrl("http://223.194.156.113:8000/")
-        .addConverterFactory(ScalarsConverterFactory.create())
-        .build()
-
-
     private val REQUEST_RECORD_AUDIO_PERMISSION = 100
-
-    val audioSource = MediaRecorder.AudioSource.MIC
-    val sampleRate = 44100
-    val channelConfig = AudioFormat.CHANNEL_IN_MONO
-    val audioFormat = AudioFormat.ENCODING_PCM_16BIT
-    val bufferSize = AudioRecord.getMinBufferSize(sampleRate, channelConfig, audioFormat)
-
-    lateinit var audioRecord : AudioRecord
-    lateinit var audioData : ByteArray
-    var readBytes = 10
+    val audioRecorder = AudioRecorder()
+    var byteArray = ByteArray(1000)
+//
+//    val audioSource = MediaRecorder.AudioSource.MIC
+//    val sampleRate = 44100
+//    val channelConfig = AudioFormat.CHANNEL_IN_MONO
+//    val audioFormat = AudioFormat.ENCODING_PCM_16BIT
+//    val bufferSize = AudioRecord.getMinBufferSize(sampleRate, channelConfig, audioFormat)
+//
+//    lateinit var audioRecord : AudioRecord
+//    lateinit var audioData : ByteArray
+//    var readBytes = 10
 
     private fun recordAudio(): ByteArray {
         // 오디오 포맷 설정
@@ -78,18 +71,31 @@ class StartFragment : BaseFragment<FragmentStartBinding>(R.layout.fragment_start
         audioRecord.stop()
         audioRecord.release()
 
+        val recordModel = byteArrayToRecordModel(audioData,readBytes)
+        val apiManager = RecordApiManager.getInstance(context)
+        apiManager?.postTest(recordModel)
+        Log.d("record audioData",audioData.contentToString())
 
-        saveAudioDataToFile(audioData)
+        // 파일에 저장
+//        saveAudioDataToFile(audioData)
 
         // 녹음된 데이터 반환
         return audioData.copyOfRange(0, readBytes)
+
     }
 
     override fun initStartView() {
         super.initStartView()
 
         //녹음
-        recordAudio()
+//        recordAudio()
+
+        // 녹음 bytArray
+        val filename: String = Date().time.toString()+".3gp"
+        val filePath = Environment.getExternalStorageDirectory().absolutePath+"/Download/"+filename
+        audioRecorder.startRecording(filePath)
+        byteArray = audioRecorder.mediaRecorderToByteArray(filePath)!!
+        Log.d("byteArray", byteArray.contentToString())
 
     }
 
@@ -104,6 +110,9 @@ class StartFragment : BaseFragment<FragmentStartBinding>(R.layout.fragment_start
         super.initAfterBinding()
 
         binding.btnStart.setOnClickListener {
+            context?.let { it1 -> audioRecorder.stopRecording(byteArray, it1) }
+
+
 
 //            val byteArray = "Hello".toByteArray()
 
@@ -142,14 +151,14 @@ class StartFragment : BaseFragment<FragmentStartBinding>(R.layout.fragment_start
     }
 
     interface ApiService {
-        @POST("process_audio")
+        @POST("posts")
         fun postByteArray(@Body byteArray: RequestBody): Call<String>
     }
 
 
     private fun saveAudioDataToFile(data: ByteArray) {
         // 저장할 파일 경로 지정
-        val filename: String = Date().time.toString()+".mp3"
+        val filename: String = Date().time.toString()+".3gp"
         val filePath = Environment.getExternalStorageDirectory().absolutePath+"/Download/"+filename
         Log.d("filePathh",filePath.toString())
 
