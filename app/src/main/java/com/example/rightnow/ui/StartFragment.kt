@@ -28,7 +28,7 @@ class StartFragment : BaseFragment<FragmentStartBinding>(R.layout.fragment_start
     private val REQUEST_RECORD_AUDIO_PERMISSION = 100
     val audioRecorder = AudioRecorder()
     var byteArray = ByteArray(1000)
-//
+
 //    val audioSource = MediaRecorder.AudioSource.MIC
 //    val sampleRate = 44100
 //    val channelConfig = AudioFormat.CHANNEL_IN_MONO
@@ -39,50 +39,7 @@ class StartFragment : BaseFragment<FragmentStartBinding>(R.layout.fragment_start
 //    lateinit var audioData : ByteArray
 //    var readBytes = 10
 
-    private fun recordAudio(): ByteArray {
-        // 오디오 포맷 설정
-        val audioSource = MediaRecorder.AudioSource.MIC
-        val sampleRate = 44100
-        val channelConfig = AudioFormat.CHANNEL_IN_MONO
-        val audioFormat = AudioFormat.ENCODING_PCM_16BIT
-        val bufferSize = AudioRecord.getMinBufferSize(sampleRate, channelConfig, audioFormat)
-        if (context?.let { ContextCompat.checkSelfPermission(it, android.Manifest.permission.RECORD_AUDIO) }
-            == PackageManager.PERMISSION_GRANTED) {
-            // 권한이 이미 부여되어 있습니다.
-            // 여기서 API를 호출합니다.
-        } else {
-            // 권한이 부여되어 있지 않습니다. 권한 요청 대화상자를 표시하여 권한을 요청합니다.
-            activity?.let {
-                ActivityCompat.requestPermissions(
-                    it,
-                    arrayOf(android.Manifest.permission.RECORD_AUDIO),
-                    REQUEST_RECORD_AUDIO_PERMISSION
-                )
-            }
-        }
-        val audioRecord = AudioRecord(audioSource, sampleRate, channelConfig, audioFormat, bufferSize)
 
-        // 녹음 시작
-        val audioData = ByteArray(bufferSize)
-        audioRecord.startRecording()
-        val readBytes = audioRecord.read(audioData, 0, bufferSize)
-
-        // 녹음 종료
-        audioRecord.stop()
-        audioRecord.release()
-
-        val recordModel = byteArrayToRecordModel(audioData,readBytes)
-        val apiManager = RecordApiManager.getInstance(context)
-        apiManager?.postTest(recordModel)
-        Log.d("record audioData",audioData.contentToString())
-
-        // 파일에 저장
-//        saveAudioDataToFile(audioData)
-
-        // 녹음된 데이터 반환
-        return audioData.copyOfRange(0, readBytes)
-
-    }
 
     override fun initStartView() {
         super.initStartView()
@@ -91,12 +48,11 @@ class StartFragment : BaseFragment<FragmentStartBinding>(R.layout.fragment_start
 //        recordAudio()
 
         // 녹음 bytArray
-        val filename: String = Date().time.toString()+".3gp"
+        val filename: String = Date().time.toString()+".aac"
         val filePath = Environment.getExternalStorageDirectory().absolutePath+"/Download/"+filename
         audioRecorder.startRecording(filePath)
-        byteArray = audioRecorder.mediaRecorderToByteArray(filePath)!!
-        Log.d("byteArray", byteArray.contentToString())
-
+//        byteArray = audioRecorder.mediaRecorderToByteArray(filePath)!!
+        Log.d("filePathh", filePath)
     }
 
     override fun initDataBinding() {
@@ -110,55 +66,19 @@ class StartFragment : BaseFragment<FragmentStartBinding>(R.layout.fragment_start
         super.initAfterBinding()
 
         binding.btnStart.setOnClickListener {
-            context?.let { it1 -> audioRecorder.stopRecording(byteArray, it1) }
-
-
-
-//            val byteArray = "Hello".toByteArray()
-
-
-
-
-//            val file = File(context?.cacheDir, "audio.mp3")
-//            file.writeBytes(audioData.copyOfRange(0, readBytes))
-//
-//            val mediaPlayer = MediaPlayer()
-//            mediaPlayer.setDataSource(file.path)
-//
-//            mediaPlayer.prepare()
-//            mediaPlayer.start()
-//
-//            mediaPlayer.release()
-
+            context?.let { it1 -> audioRecorder.stopRecording(it1) }
 
             navController.navigate(R.id.action_startFragment_to_quizFragment)
 
-//            val apiService = retrofit.create(ApiService::class.java)
-//            val requestBody = RequestBody.create(MediaType.parse("application/octet-stream"), audioData.copyOfRange(0, readBytes))
-//            val call = apiService.postByteArray(requestBody)
-//            call.enqueue(object : Callback<String> {
-//                override fun onResponse(call: Call<String>, response: Response<String>) {
-//                    // Handle the response from the server here.
-//                }
-//
-//                override fun onFailure(call: Call<String>, t: Throwable) {
-//                    // Handle errors that occur during the request here.
-//                }
-//            })
 
         }
 
     }
 
-    interface ApiService {
-        @POST("posts")
-        fun postByteArray(@Body byteArray: RequestBody): Call<String>
-    }
-
 
     private fun saveAudioDataToFile(data: ByteArray) {
         // 저장할 파일 경로 지정
-        val filename: String = Date().time.toString()+".3gp"
+        val filename: String = Date().time.toString()+".aac"
         val filePath = Environment.getExternalStorageDirectory().absolutePath+"/Download/"+filename
         Log.d("filePathh",filePath.toString())
 
