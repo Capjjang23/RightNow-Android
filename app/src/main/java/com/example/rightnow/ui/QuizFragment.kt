@@ -3,10 +3,14 @@ package com.example.rightnow.ui
 import android.media.AudioRecord
 import android.media.MediaRecorder
 import android.os.Build
+import android.os.Environment
+import android.util.Log
 import androidx.viewpager2.widget.ViewPager2
 import com.android.example.travalue.base.BaseFragment
+import com.example.rightnow.common.AudioRecorder
 import com.example.rightnow.R
 import com.example.rightnow.databinding.FragmentQuizBinding
+import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -65,10 +69,22 @@ class QuizFragment  : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) 
 
         binding.dotsIndicator.setViewPager2(binding.viewPager2)
 
+        // 녹음 파일 이름
+        var filePath = Environment.getExternalStorageDirectory().absolutePath+"/Download/"+Date().time.toString()+".aac"
+
+        // 녹음 시작
+        val audioRecorder = AudioRecorder()
+        audioRecorder.startRecording(filePath)
+        Log.d("[mmihye] startRecording : ", filePath)
+
+
         // 정답 제출
         binding.btnCheck.setOnClickListener {
-            val action = QuizFragmentDirections.actionQuizFragmentToQuizResultDialog(answer)
-            navController.navigate(action)
+//            val action = QuizFragmentDirections.actionQuizFragmentToQuizResultDialog(answer)
+//            navController.navigate(action)
+            context?.let { it1 -> audioRecorder.restartRecording(it1) }
+            filePath = Environment.getExternalStorageDirectory().absolutePath+"/Download/"+Date().time.toString()+".aac"
+            audioRecorder.startRecording(filePath)
 
         }
 

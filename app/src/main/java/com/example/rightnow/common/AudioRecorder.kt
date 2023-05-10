@@ -1,12 +1,9 @@
-package com.example.rightnow
+package com.example.rightnow.common
 import android.content.Context
 import android.media.MediaRecorder
-import android.os.Environment
 import android.util.Log
 import com.example.rightnow.apiManager.RecordApiManager
 import com.example.rightnow.model.RecordModel
-import okhttp3.MediaType
-import okhttp3.RequestBody
 import java.io.IOException
 
 import java.io.ByteArrayOutputStream
@@ -28,6 +25,7 @@ class AudioRecorder {
             setAudioEncoder(MediaRecorder.AudioEncoder.AAC) // or MediaRecorder.AudioEncoder.DEFAULT
             setAudioSamplingRate(44100) // set the desired sampling rate
             setAudioEncodingBitRate(320000)
+            setMaxDuration(1000)
 
             try {
                 prepare()
@@ -40,6 +38,26 @@ class AudioRecorder {
         }
     }
 
+    fun restartRecording(context: Context){
+        if (!isRecording) return
+
+        isRecording = false
+        mediaRecorder?.apply {
+            release()
+        }
+
+        // 서버 전송
+        Log.d("send file",fileName)
+        val byteArray = mediaRecorderToByteArray(fileName)
+        val recordModel = byteArray?.let { RecordModel(it) }
+        val apiManager = RecordApiManager.getInstance(context)
+        if (recordModel != null) {
+            apiManager?.postTest(recordModel)
+        }
+
+        mediaRecorder = null
+    }
+
     fun stopRecording(context : Context ) {
         if (!isRecording) return
 
@@ -50,15 +68,6 @@ class AudioRecorder {
         mediaRecorder = null
         isRecording = false
 
-
-        // 서버 전송
-        Log.d("send file",fileName)
-        val byteArray = mediaRecorderToByteArray(fileName)
-        val recordModel = byteArray?.let { RecordModel(it) }
-        val apiManager = RecordApiManager.getInstance(context)
-        if (recordModel != null) {
-            apiManager?.postTest(recordModel)
-        }
 
     }
 

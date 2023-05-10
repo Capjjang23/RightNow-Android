@@ -17,6 +17,8 @@ import androidx.navigation.fragment.findNavController
 abstract class BaseFragment<B: ViewDataBinding> (@LayoutRes private  val layoutResourceId: Int) :
     Fragment() {
 
+    val PERMISSIONS_REQUEST: Int = 101
+
     // protected abstract val viewModel: VM
     protected lateinit var binding: B
     protected lateinit var navController: NavController
