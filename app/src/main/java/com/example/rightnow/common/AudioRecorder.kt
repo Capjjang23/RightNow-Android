@@ -12,10 +12,10 @@ import java.io.FileInputStream
 
 class AudioRecorder {
     private var mediaRecorder: MediaRecorder? = null
-    private var isRecording = false
+     var isRecording = false
     private var fileName = ""
 
-    fun startRecording(outputFile: String) {
+    fun startRecording(outputFile: String, apiManager: RecordApiManager) {
         if (isRecording) return
 
         mediaRecorder = MediaRecorder().apply {
@@ -25,7 +25,7 @@ class AudioRecorder {
             setAudioEncoder(MediaRecorder.AudioEncoder.AAC) // or MediaRecorder.AudioEncoder.DEFAULT
             setAudioSamplingRate(44100) // set the desired sampling rate
             setAudioEncodingBitRate(320000)
-            setMaxDuration(1000)
+            setMaxDuration(2000)
 
             try {
                 prepare()
@@ -33,9 +33,20 @@ class AudioRecorder {
                 e.printStackTrace()
             }
             start()
-            fileName = outputFile
             isRecording = true
         }
+
+        Thread.sleep(2000)
+
+        // 서버 전송
+        isRecording = false
+        Log.d("[mmihye]","녹음 멈춤 & 서버 전송")
+        val byteArray = mediaRecorderToByteArray(outputFile)
+        val recordModel = byteArray?.let { RecordModel(it) }
+        if (recordModel != null) {
+            apiManager.postTest(recordModel)
+        }
+
     }
 
     fun restartRecording(context: Context){
