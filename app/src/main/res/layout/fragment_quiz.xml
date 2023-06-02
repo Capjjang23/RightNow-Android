@@ -8,6 +8,31 @@
     android:background="@color/yellow_background">
 
 
+    <Button
+        android:id="@+id/btn_answer"
+        android:layout_width="318dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/btn_yellow_round_30"
+        android:fontFamily="@font/scdream5"
+        android:text="정답 제출하기"
+        android:textColor="#2F3543"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btn_stop"
+        app:layout_constraintStart_toStartOf="@+id/btn_check" />
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="31dp"
+        android:layout_height="29dp"
+        android:layout_marginEnd="50dp"
+        android:background="@color/yellow_background"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_text"
+        app:layout_constraintEnd_toEndOf="@+id/viewPager2"
+        app:layout_constraintTop_toTopOf="@+id/tv_text"
+        app:srcCompat="@drawable/btn_back" />
+
     <ImageView
         android:id="@+id/small_logo"
         android:layout_width="wrap_content"
@@ -17,6 +42,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/small_logo" />
+
+    <TextView
+        android:id="@+id/tv_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/helvetica"
+        android:text=" 이곳에 단어가 자동입력 될거에요!"
+        android:textColor="#A5A5A5"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/viewPager2"
+        app:layout_constraintTop_toBottomOf="@+id/viewPager2" />
 
     <ImageView
         android:id="@+id/how"
@@ -39,11 +77,15 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager2"
         android:layout_width="0dp"
-        android:layout_height="480dp"
-        android:layout_marginTop="35dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="80dp"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:elevation="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/dotsIndicator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/small_logo" />
@@ -54,7 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="16dp"
         app:dotsColor="@color/gray"
         app:dotsCornerRadius="8dp"
         app:dotsSize="8dp"
@@ -62,20 +104,54 @@
         app:dotsStrokeWidth="2dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_check"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:selectedDotColor="@color/black" />
 
     <Button
         android:id="@+id/btn_check"
-        android:layout_width="321dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="52dp"
+        android:layout_width="145dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/btn_black_round_30"
         android:fontFamily="@font/scdream5"
-        android:text="제출하기"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="녹음 시작하기"
+        app:layout_constraintBottom_toTopOf="@+id/btn_answer"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_stop"
+        android:layout_width="145dp"
+        android:layout_height="39dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/btn_black_round_30"
+        android:fontFamily="@font/scdream5"
+        android:text="녹음 멈추기"
+        app:layout_constraintBottom_toTopOf="@+id/btn_answer"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="#959595"
+        app:layout_constraintEnd_toEndOf="@+id/btn_back"
+        app:layout_constraintStart_toStartOf="@+id/tv_text"
+        app:layout_constraintTop_toBottomOf="@+id/tv_text" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/helvetica_condensed_bold"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view4"
+        app:layout_constraintStart_toStartOf="@+id/tv_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

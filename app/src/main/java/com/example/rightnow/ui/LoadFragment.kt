@@ -29,6 +29,10 @@ class LoadFragment  : BaseFragment<FragmentLoadBinding>(R.layout.fragment_load) 
     override fun initAfterBinding() {
         super.initAfterBinding()
 
+        binding.startScreen.setOnClickListener {
+            navController.navigate(R.id.action_loadFragment_to_startFragment)
+        }
     }
+
 
 }

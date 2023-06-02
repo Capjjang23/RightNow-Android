@@ -34,8 +34,6 @@ class StartFragment : BaseFragment<FragmentStartBinding>(R.layout.fragment_start
         super.initAfterBinding()
 
         binding.btnStart.setOnClickListener {
-            context?.let { it1 -> audioRecorder.stopRecording(it1) }
-
             navController.navigate(R.id.action_startFragment_to_quizFragment)
 
 

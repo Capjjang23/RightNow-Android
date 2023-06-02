@@ -12,11 +12,11 @@ import java.io.FileInputStream
 
 class AudioRecorder {
     private var mediaRecorder: MediaRecorder? = null
-     var isRecording = false
+    var isRecording = true
     private var fileName = ""
 
     fun startRecording(outputFile: String, apiManager: RecordApiManager) {
-        if (isRecording) return
+        isRecording =true
 
         mediaRecorder = MediaRecorder().apply {
             setAudioSource(MediaRecorder.AudioSource.MIC)
@@ -25,7 +25,7 @@ class AudioRecorder {
             setAudioEncoder(MediaRecorder.AudioEncoder.AAC) // or MediaRecorder.AudioEncoder.DEFAULT
             setAudioSamplingRate(44100) // set the desired sampling rate
             setAudioEncodingBitRate(320000)
-            setMaxDuration(2000)
+            setMaxDuration(1500)
 
             try {
                 prepare()
@@ -33,13 +33,11 @@ class AudioRecorder {
                 e.printStackTrace()
             }
             start()
-            isRecording = true
         }
 
-        Thread.sleep(2000)
+        Thread.sleep(1500)
 
         // 서버 전송
-        isRecording = false
         Log.d("[mmihye]","녹음 멈춤 & 서버 전송")
         val byteArray = mediaRecorderToByteArray(outputFile)
         val recordModel = byteArray?.let { RecordModel(it) }
@@ -49,28 +47,8 @@ class AudioRecorder {
 
     }
 
-    fun restartRecording(context: Context){
-        if (!isRecording) return
 
-        isRecording = false
-        mediaRecorder?.apply {
-            release()
-        }
-
-        // 서버 전송
-        Log.d("send file",fileName)
-        val byteArray = mediaRecorderToByteArray(fileName)
-        val recordModel = byteArray?.let { RecordModel(it) }
-        val apiManager = RecordApiManager.getInstance(context)
-        if (recordModel != null) {
-            apiManager?.postTest(recordModel)
-        }
-
-        mediaRecorder = null
-    }
-
-    fun stopRecording(context : Context ) {
-        if (!isRecording) return
+    fun stopRecording() {
 
         mediaRecorder?.apply {
             stop()
@@ -78,7 +56,6 @@ class AudioRecorder {
         }
         mediaRecorder = null
         isRecording = false
-
 
     }
 

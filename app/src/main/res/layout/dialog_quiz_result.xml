@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="234dp"
-        android:background="@color/white">
+        android:background="@drawable/bottom_sheet_border">
 
         <View
             android:id="@+id/view3"
@@ -25,10 +25,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="27dp"
-            android:fontFamily="@font/helvetica"
+            android:fontFamily="@font/helvetica_bold"
             android:text="정답입니다!"
             android:textColor="#000000"
-            android:textSize="18sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -47,26 +47,14 @@
             android:id="@+id/tv_quiz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/helvetica"
-            android:text="병아리는 영어로 "
+            android:text="병아리는 영어로 chick 입니다."
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="@+id/view3"
             app:layout_constraintStart_toStartOf="@+id/view3"
             app:layout_constraintTop_toBottomOf="@+id/view3" />
-
-        <TextView
-            android:id="@+id/tv_answer2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:fontFamily="@font/helvetica"
-            android:text="입니다."
-            android:textColor="#000000"
-            android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/tv_answer"
-            app:layout_constraintTop_toTopOf="@+id/tv_quiz" />
 
         <Button
             android:id="@+id/button"
@@ -84,17 +72,18 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/tv_answer"
+            android:id="@+id/tv_hansung"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:fontFamily="@font/scdream6"
-            android:text="chick"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_quiz"
-            app:layout_constraintStart_toEndOf="@+id/tv_quiz"
-            app:layout_constraintTop_toTopOf="@+id/tv_quiz" />
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/scdream7"
+            android:text="오고싶은 대학 머물고싶은 대학"
+            android:textColor="#3F51B5"
+            android:textSize="24sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_quiz" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

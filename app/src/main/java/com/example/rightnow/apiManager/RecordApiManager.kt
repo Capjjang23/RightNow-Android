@@ -33,7 +33,7 @@ class RecordApiManager {
 
     init {
         retrofit = Retrofit.Builder()
-            .baseUrl("http://172.30.1.17:8000")
+            .baseUrl("http://223.194.133.143:8000")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -50,10 +50,7 @@ class RecordApiManager {
                 if (response.isSuccessful) {
                     val result: PostTestModel = response.body()!!
                     Log.d("[mmihye]","서버응답 : "+result.predicted_alphabet)
-                    if(_resultLivedata.value==null)
-                        _resultLivedata.postValue(result.predicted_alphabet)
-                    else
-                        _resultLivedata.postValue(_resultLivedata.value+result.predicted_alphabet)
+                    _resultLivedata.postValue(result.predicted_alphabet)
 
                 } else {
                     //EventBus.getDefault().post(GetDataEvent(null))
